@@ -1,0 +1,63 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: url(background11.jpg) no-repeat center center fixed;
+    background-size: cover;
+}
+
+.container {
+    backdrop-filter: blur(10px);
+     background-color: rgba(255, 255, 255, 0.3);
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px;
+}
+
+.header {
+    background-color: red;
+    color: white;
+    text-align: center;
+    padding: 40px;
+}
+
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.image-title {
+    background-color: red;
+    color: white;
+    padding: 5px;
+}
+
+.image-container {
+    text-align: center;
+    margin: 10px; 0;
+}
+
+.image-container img {
+    border-radius: 10px;
+}
+
+.navigation {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.nav-button {
+    background-color: red;
+    color: white;
+    padding: 10px 20px;
+    margin: 0 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.nav-button:hover {
+    background-color: darkred;
+}
+
