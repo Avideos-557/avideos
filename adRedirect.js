@@ -8,10 +8,10 @@ document.addEventListener('click', (event) => {
   if (isEvenClick && shouldRedirect) {
     // Redirect to ad website
     window.location.href = 'https://www.profitableratecpm.com/m5u0fm024?key=915f5541df37252209d1ab523c2cc8e5';
-    shouldRedirect = false;
+    shouldRedirect = true;
     localStorage.setItem('shouldRedirect', shouldRedirect.toString());
   } else if (!isEvenClick) {
-    shouldRedirect = true;
+    shouldRedirect = false;
     localStorage.setItem('shouldRedirect', shouldRedirect.toString());
   }
 });
