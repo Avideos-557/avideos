@@ -1,17 +1,12 @@
-let isEvenClick = localStorage.getItem('isEvenClick') === 'true';
-let shouldRedirect = localStorage.getItem('shouldRedirect') === 'true';
+document.addEventListener('click', function () {
+  let clickCount = localStorage.getItem('adClickCount');
+  clickCount = clickCount ? parseInt(clickCount) : 0;
 
-document.addEventListener('click', (event) => {
-  isEvenClick = !isEvenClick; // Toggle even/odd click
-  localStorage.setItem('isEvenClick', isEvenClick.toString());
+  clickCount++;
+  localStorage.setItem('adClickCount', clickCount);
 
-  if (isEvenClick && shouldRedirect) {
-    // Redirect to ad website
-    window.location.href = 'https://www.profitableratecpm.com/m5u0fm024?key=915f5541df37252209d1ab523c2cc8e5';
-    shouldRedirect = true;
-    localStorage.setItem('shouldRedirect', shouldRedirect.toString());
-  } else if (!isEvenClick) {
-    shouldRedirect = false;
-    localStorage.setItem('shouldRedirect', shouldRedirect.toString());
+  // Redirect only on odd-numbered clicks
+  if (clickCount % 2 === 1) {
+    window.location.href = 'https://yourdirectlink.com'; // replace with your real URL
   }
 });
