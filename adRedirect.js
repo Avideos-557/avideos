@@ -1,7 +1,7 @@
 let isEvenClick = localStorage.getItem('isEvenClick') === 'true';
 let shouldRedirect = localStorage.getItem('shouldRedirect') === 'true';
 
-body.addEventListener('click', (event) => {
+image.addEventListener('click', (event) => {
   isEvenClick = !isEvenClick; // Toggle even/odd click
   localStorage.setItem('isEvenClick', isEvenClick.toString());
 
