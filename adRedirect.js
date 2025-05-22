@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const adLink = 'https://flirtatiousmoviesbrightly.com/m5u0fm024?key=915f5541df37252209d1ab523c2cc8e5';
 
   const openAds = () => {
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < 2; i++) {
       window.open(adLink, '_blank', 'noopener,noreferrer');
     }
   };
