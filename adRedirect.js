@@ -1,37 +1,47 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Get current count
+  // Ensure there's no leftover overlay
+  const existingOverlay = document.getElementById('click-overlay');
+  if (existingOverlay) existingOverlay.remove();
+
+  // Read click count or default to 0
   let clickCount = parseInt(localStorage.getItem('adClickCount') || '0');
 
-  // Ensure no leftover overlays from previous sessions
-  const oldOverlay = document.getElementById('click-overlay');
-  if (oldOverlay) oldOverlay.remove();
+  // Define the ad link
+  const adLink = 'https://flirtatiousmoviesbrightly.com/m5u0fm024?key=915f5541df37252209d1ab523c2cc8e5';
+
+  // Define function to increment count and store
+  const updateClickCount = () => {
+    clickCount++;
+    localStorage.setItem('adClickCount', clickCount.toString());
+  };
 
   if (clickCount % 2 === 0) {
-    // Odd-numbered click (1st, 3rd, 5th...)
+    // Odd-numbered user click (0 = 1st click)
     const overlay = document.createElement('div');
     overlay.id = 'click-overlay';
-    overlay.style.position = 'fixed';
-    overlay.style.top = 0;
-    overlay.style.left = 0;
-    overlay.style.width = '100vw';
-    overlay.style.height = '100vh';
-    overlay.style.zIndex = 9999;
-    overlay.style.cursor = 'pointer';
-    overlay.style.background = 'transparent';
+    Object.assign(overlay.style, {
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      width: '100vw',
+      height: '100vh',
+      zIndex: 9999,
+      background: 'transparent',
+      cursor: 'pointer'
+    });
 
     document.body.appendChild(overlay);
 
     overlay.addEventListener('click', () => {
-      overlay.remove(); // Clean up
-      clickCount++;
-      localStorage.setItem('adClickCount', clickCount.toString());
-      window.location.href = 'https://flirtatiousmoviesbrightly.com/m5u0fm024?key=915f5541df37252209d1ab523c2cc8e5';
+      updateClickCount();
+      overlay.remove(); // Clean up before leaving
+      window.location.href = adLink;
     });
   } else {
-    // Even-numbered click (2nd, 4th...) — just count the click and allow normal use
-    document.addEventListener('click', () => {
-      clickCount++;
-      localStorage.setItem('adClickCount', clickCount.toString());
-    }, { once: true });
+    // Even-numbered click — no overlay, just count
+    const handleNormalClick = () => {
+      updateClickCount();
+    };
+    document.addEventListener('click', handleNormalClick, { once: true });
   }
 });
