@@ -2,9 +2,10 @@ document.addEventListener('DOMContentLoaded', () => {
   let clickCount = localStorage.getItem('adClickCount');
   clickCount = clickCount ? parseInt(clickCount) : 0;
 
-  const isOddClick = (clickCount + 1) % 2 === 1;
+  const isOddClick = clickCount % 2 === 0; // YES: 0 = 1st click, 2 = 3rd, etc.
 
   if (isOddClick) {
+    // Odd-numbered click (1st, 3rd, 5th...) — show overlay and redirect
     const overlay = document.createElement('div');
     overlay.style.position = 'fixed';
     overlay.style.top = '0';
@@ -18,22 +19,14 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.appendChild(overlay);
 
     overlay.addEventListener('click', () => {
-      // Increment click count first
-      clickCount++;
-      localStorage.setItem('adClickCount', clickCount.toString());
-
-      // Remove overlay immediately
       overlay.remove();
-
-      // Then redirect
+      localStorage.setItem('adClickCount', (clickCount + 1).toString());
       window.location.href = 'https://flirtatiousmoviesbrightly.com/m5u0fm024?key=915f5541df37252209d1ab523c2cc8e5';
     });
   } else {
-    // For even clicks: increment on any click and do not block UI
-    const normalClick = () => {
-      clickCount++;
-      localStorage.setItem('adClickCount', clickCount.toString());
-    };
-    document.addEventListener('click', normalClick, { once: true });
+    // Even-numbered click (2nd, 4th...) — no redirect
+    document.addEventListener('click', () => {
+      localStorage.setItem('adClickCount', (clickCount + 1).toString());
+    }, { once: true });
   }
 });
