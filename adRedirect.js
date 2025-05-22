@@ -1,16 +1,24 @@
-document.addEventListener('DOMContentLoaded', function () {
-  document.body.style.height = '100vh';
-  document.body.style.cursor = 'pointer'; // So people know they can click
+// Create a full-page invisible overlay to capture all clicks
+const overlay = document.createElement('div');
+overlay.style.position = 'fixed';
+overlay.style.top = '0';
+overlay.style.left = '0';
+overlay.style.width = '100vw';
+overlay.style.height = '100vh';
+overlay.style.zIndex = '9999';
+overlay.style.cursor = 'pointer';
+overlay.style.background = 'transparent'; // Make sure it's invisible
 
-  document.body.addEventListener('click', function () {
-    let clickCount = localStorage.getItem('adClickCount');
-    clickCount = clickCount ? parseInt(clickCount) : 0;
+document.body.appendChild(overlay);
 
-    clickCount++;
-    localStorage.setItem('adClickCount', clickCount);
+overlay.addEventListener('click', () => {
+  let clickCount = localStorage.getItem('adClickCount');
+  clickCount = clickCount ? parseInt(clickCount) : 0;
 
-    if (clickCount % 2 === 1) {
-      window.location.href = 'https://flirtatiousmoviesbrightly.com/m5u0fm024?key=915f5541df37252209d1ab523c2cc8e5'; // Replace with your real URL
-    }
-  });
+  clickCount++;
+  localStorage.setItem('adClickCount', clickCount);
+
+  if (clickCount % 2 === 1) {
+    window.location.href = 'https://yourdirectlink.com'; // Replace with your link
+  }
 });
