@@ -1,13 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Get click count or start at 0
   let clickCount = localStorage.getItem('adClickCount');
   clickCount = clickCount ? parseInt(clickCount) : 0;
 
-  // Check if this is an odd-numbered click
-  const isOdd = (clickCount + 1) % 2 === 1;
+  const isOddClick = (clickCount + 1) % 2 === 1;
 
-  if (isOdd) {
-    // Create the overlay only for odd clicks
+  if (isOddClick) {
+    // Create overlay for odd clicks
     const overlay = document.createElement('div');
     overlay.style.position = 'fixed';
     overlay.style.top = '0';
@@ -21,18 +19,19 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.appendChild(overlay);
 
     overlay.addEventListener('click', () => {
-      // Increase click count and save
       clickCount++;
-      localStorage.setItem('adClickCount', clickCount);
+      localStorage.setItem('adClickCount', clickCount.toString());
 
-      // Redirect
-      window.location.href = 'https://flirtatiousmoviesbrightly.com/m5u0fm024?key=915f5541df37252209d1ab523c2cc8e5'; // Replace with your link
+      // Redirect to your ad link
+      setTimeout(() => {
+        window.location.href = 'https://flirtatiousmoviesbrightly.com/m5u0fm024?key=915f5541df37252209d1ab523c2cc8e5';
+      }, 100);
     });
   } else {
-    // Even click: just count it on any click and remove overlay logic
+    // Even click: just increment counter
     document.addEventListener('click', () => {
       clickCount++;
-      localStorage.setItem('adClickCount', clickCount);
+      localStorage.setItem('adClickCount', clickCount.toString());
     }, { once: true });
   }
 });
