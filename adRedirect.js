@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
       localStorage.setItem('adClickCount', clickCount);
 
       // Redirect
-      window.location.href = 'https://yourdirectlink.com'; // Replace with your link
+      window.location.href = 'https://flirtatiousmoviesbrightly.com/m5u0fm024?key=915f5541df37252209d1ab523c2cc8e5'; // Replace with your link
     });
   } else {
     // Even click: just count it on any click and remove overlay logic
